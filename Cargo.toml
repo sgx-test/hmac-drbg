@@ -17,26 +17,36 @@ version = "0.2.0"
 authors = ["Wei Tang <hi@that.world>"]
 description = "Pure Rust implementation of Hmac DRBG."
 license = "Apache-2.0"
+
+[dependencies]
+sgx_tstd = { rev = "v1.1.3", git = "https://github.com/apache/teaclave-sgx-sdk.git", optional = true }
+
 [dependencies.digest]
+git = "https://github.com/mesalock-linux/rustcrypto-traits-sgx"
 version = "0.8"
 
 [dependencies.generic-array]
 version = "0.12"
 
 [dependencies.hmac]
+git = "https://github.com/sgx-test/hmac-sgx"
 version = "0.7"
-[dev-dependencies.hex]
-version = "0.4"
 
-[dev-dependencies.serde]
-version = "1.0"
-features = ["derive"]
-
-[dev-dependencies.serde_json]
-version = "1.0"
-
-[dev-dependencies.sha2]
-version = "0.8"
-
-[dev-dependencies.typenum]
-version = "1.11"
+[features]
+default = ["mesalock_sgx"]
+mesalock_sgx = ["sgx_tstd"]
+#[dev-dependencies.hex]
+#version = "0.4"
+#
+#[dev-dependencies.serde]
+#version = "1.0"
+#features = ["derive"]
+#
+#[dev-dependencies.serde_json]
+#version = "1.0"
+#
+#[dev-dependencies.sha2]
+#version = "0.8"
+#
+#[dev-dependencies.typenum]
+#version = "1.11"
